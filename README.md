@@ -17,3 +17,19 @@ One JSON object per line: one benchmark lane (machine, compiler, offload model) 
 Lines are appended by the `record` job of `.github/workflows/bench.yml` after each scheduled benchmark run.
 
 Lines with a `measured` field were rebuilt from past pull-request benchmark runs, each of which also measured `master`; `measured` is when that run was made, so one commit can have several lines per lane. On the Frontier lanes of those lines, `sha` is the `master` commit current when the lane's job started (the result file did not record it). Results that a runner uploaded under the wrong lane were left out.
+
+## `ci/<YYYY-MM>.jsonl`
+
+One JSON object per line: one Test Suite or Benchmark run that had at least one job on a cluster, filed under the month the run was created. It feeds the [CI health page](https://mflowcode.github.io/ci.html).
+
+| Field | Meaning |
+|---|---|
+| `run`, `workflow`, `event`, `date` | The run, `test` or `bench`, what triggered it, when it was created |
+| `master`, `sha`, `title`, `pr` | Whether it ran on `master`, the commit, the run title, and for a `master` commit its pull request |
+| `jobs[]` | One entry per cluster job: `l` lane, `k` kind (`test`, `case-opt`, `bench`), `s` shard, `m` `smoke` or `full`, `a` attempt, `c` conclusion, `w` seconds waiting for a runner, `d` seconds from start to finish, `id` GitHub job id, `u` its SLURM jobs as `[name, nodes, elapsed s, queued s, state]` |
+
+Lines are written by `.github/workflows/ci-record.yml` after each run; a re-run replaces its run's line. Lines from before that recorder have an empty `u`.
+
+## `usage.jsonl`
+
+SLURM accounting from before the recorder existed, one line per day, cluster and kind of job: `node_hours`, `jobs` and `queued_median` (seconds). The CI health page uses it for days that have no `u` entries.
