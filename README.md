@@ -8,7 +8,7 @@ One JSON object per line: one benchmark lane (machine, compiler, offload model) 
 
 | Field | Meaning |
 |---|---|
-| `sha`, `subject`, `date` | The `master` commit measured and when |
+| `sha`, `subject`, `pr`, `date` | The `master` commit measured, the pull request that produced it, and the commit date |
 | `cluster`, `device`, `interface` | The lane, e.g. `frontier_amd`, `gpu`, `omp` |
 | `cases.<name>.grind` | Grind time: nanoseconds per grid point, equation and Runge-Kutta stage |
 | `cases.<name>.def` | Hash of the case's input file, arguments and benchmark flags; grind times are comparable only within one `def` |
