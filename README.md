@@ -11,6 +11,7 @@ One JSON object per line: one benchmark lane (machine, compiler, offload model) 
 | `sha`, `subject`, `pr`, `date` | The `master` commit measured, the pull request that produced it, and the commit date |
 | `cluster`, `device`, `interface` | The lane, e.g. `frontier_amd`, `gpu`, `omp` |
 | `hardware` | GPU model where a cluster has several (Phoenix: `h200`, `h100`, `a100`, `l40s`, `v100`); grind times differ several-fold between them |
+| `covers` | Every commit since the previously benchmarked one, as `[sha, subject, pr]`; any of them can be behind a change |
 | `cases.<name>.grind` | Grind time: nanoseconds per grid point, equation and Runge-Kutta stage |
 | `cases.<name>.def` | Hash of the case's input file, arguments and benchmark flags; grind times are comparable only within one `def` |
 
@@ -26,6 +27,7 @@ One JSON object per line: one Test Suite or Benchmark run that had at least one 
 |---|---|
 | `run`, `workflow`, `event`, `date` | The run, `test` or `bench`, what triggered it, when it was created |
 | `master`, `sha`, `title`, `pr` | Whether it ran on `master`, the commit, the run title, and for a `master` commit its pull request |
+| `merges` | For a `master` run, the merges it is the first to test, as `[sha, title, pr]`: a scheduled run covers every merge since the one before |
 | `jobs[]` | One entry per cluster job: `l` lane, `k` kind (`test`, `case-opt`, `bench`), `s` shard, `m` `smoke` or `full`, `a` attempt, `c` conclusion, `w` seconds waiting for a runner, `d` seconds from start to finish, `id` GitHub job id, `u` its SLURM jobs as `[name, nodes, elapsed s, queued s, state]` |
 
 Lines are written by `.github/workflows/ci-record.yml` after each run; a re-run replaces its run's line. Lines from before that recorder have an empty `u`.
