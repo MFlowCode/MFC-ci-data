@@ -15,4 +15,4 @@ One JSON object per line: one benchmark lane (machine, compiler, offload model) 
 
 Lines are appended by the `record` job of `.github/workflows/bench.yml` after each scheduled benchmark run.
 
-Lines dated before the recorder went live were rebuilt from past pull-request benchmark runs, each of which also measured `master`. For those, `date` is when the run was created, and on the Frontier lanes `sha` is the `master` commit current when the lane's job started (the result file did not record it).
+Lines with a `measured` field were rebuilt from past pull-request benchmark runs, each of which also measured `master`; `measured` is when that run was made, so one commit can have several lines per lane. On the Frontier lanes of those lines, `sha` is the `master` commit current when the lane's job started (the result file did not record it). Results that a runner uploaded under the wrong lane were left out.
