@@ -44,3 +44,7 @@ SLURM accounting from before the recorder existed: median seconds a Frontier bui
 ## `scaling.jsonl`
 
 One line per weekly scaling run on Frontier (`scaling.yml` in MFC): the master commit and, per run, `kind` (`weak` or `strong`), `nodes`, `ranks` (GPUs), `cells`, `grind` (ns per grid point, equation and RK stage, over all ranks) and `step` (seconds per time step). Efficiency against the smallest run is `grind(smallest)·ranks(smallest)/(grind(N)·ranks(N))`.
+
+## `authors.jsonl`
+
+One line per pull request the other files name: `{"pr": 2437, "by": "<GitHub login of who opened it>"}`. The CI recorder adds a pull request the first time it records a run of it or a master run that merged it. The dashboard shows the login beside the pull request number.
