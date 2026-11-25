@@ -40,3 +40,7 @@ SLURM accounting from before the recorder existed, one line per day, cluster and
 ## `builds.jsonl`
 
 SLURM accounting from before the recorder existed: median seconds a Frontier build job ran, one line per day, lane and build variant. The CI health page uses it for days that have no `u` entries.
+
+## `scaling.jsonl`
+
+One line per weekly scaling run on Frontier (`scaling.yml` in MFC): the master commit and, per run, `kind` (`weak` or `strong`), `nodes`, `ranks` (GPUs), `cells`, `grind` (ns per grid point, equation and RK stage, over all ranks) and `step` (seconds per time step). Efficiency against the smallest run is `grind(smallest)·ranks(smallest)/(grind(N)·ranks(N))`.
