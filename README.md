@@ -4,7 +4,7 @@ History written by the CI of [MFlowCode/MFC](https://github.com/MFlowCode/MFC) a
 
 ## `benchmarks.jsonl`
 
-One JSON object per line: one benchmark lane (machine, compiler, offload model) measuring one commit of `master`. It feeds the [performance history page](https://mflowcode.github.io/benchmarks.html).
+One JSON object per line: one benchmark lane (machine, compiler, offload model) measuring one commit of `master`. It feeds the [performance history page](https://mflowcode.github.io/dashboard/benchmarks.html).
 
 | Field | Meaning |
 |---|---|
@@ -22,7 +22,7 @@ Lines with a `measured` field were rebuilt from past pull-request benchmark runs
 
 ## `ci/<YYYY-MM>.jsonl`
 
-One JSON object per line: one Test Suite or Benchmark run that had at least one job on a cluster, filed under the month the run was created. It feeds the [CI health](https://mflowcode.github.io/ci.html) and [test health](https://mflowcode.github.io/tests.html) pages.
+One JSON object per line: one Test Suite or Benchmark run that had at least one job on a cluster, filed under the month the run was created. It feeds the [CI health](https://mflowcode.github.io/dashboard/ci.html) and [test health](https://mflowcode.github.io/dashboard/tests.html) pages.
 
 | Field | Meaning |
 |---|---|
