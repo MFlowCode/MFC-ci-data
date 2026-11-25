@@ -40,3 +40,7 @@ SLURM accounting from before the recorder existed, one line per day, cluster and
 ## `builds.jsonl`
 
 SLURM accounting from before the recorder existed: median seconds a Frontier build job ran, one line per day, lane and build variant. The CI health page uses it for days that have no `u` entries.
+
+## `badge.json`
+
+The status badge in MFC's README (a shields.io endpoint): how many cluster lanes pass on `master`, rewritten by the CI recorder after each run.
