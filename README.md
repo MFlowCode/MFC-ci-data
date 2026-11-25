@@ -27,7 +27,7 @@ One JSON object per line: one Test Suite or Benchmark run that had at least one 
 | Field | Meaning |
 |---|---|
 | `run`, `workflow`, `event`, `date` | The run, `test` or `bench`, what triggered it, when it was created |
-| `master`, `sha`, `title`, `pr` | Whether it ran on `master`, the commit, the run title, and for a `master` commit its pull request |
+| `master`, `sha`, `title`, `pr` | Whether it ran on `master`, the commit, the run title, and its pull request |
 | `merges` | For a `master` run, the merges it is the first to test, as `[sha, title, pr]`: a scheduled run covers every merge since the one before |
 | `jobs[]` | One entry per cluster job: `l` lane, `k` kind (`test`, `case-opt`, `bench`), `s` shard, `m` `smoke` or `full`, `a` attempt, `c` conclusion, `w` seconds waiting for a runner, `d` seconds from start to finish, `id` GitHub job id, `u` its SLURM jobs as `[name, nodes, elapsed s, queued s, state]`; for a test job whose log was read: `n` tests passed, `tt` seconds the test phase took, `slow` the six slowest tests as `[uuid, name, seconds]`, `f` tests that failed and `r` tests that passed only on a retry, each `[uuid, name, error class]`, and for a failed job `why` (`tests`, `build`, `timeout`, `node`, `checkout`, `upload`, `runner`, `other`) |
 
