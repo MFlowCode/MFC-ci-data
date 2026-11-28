@@ -12,9 +12,11 @@ One JSON object per line: one benchmark lane (machine, compiler, offload model) 
 | `cluster`, `device`, `interface` | The lane, e.g. `frontier_amd`, `gpu`, `omp` |
 | `hardware` | GPU model where a cluster has several (Phoenix: `h200`, `h100`, `a100`, `l40s`, `v100`); grind times differ several-fold between them |
 | `covers` | Every commit since the previously benchmarked one, as `[sha, subject, pr]`; any of them can be behind a change |
-| `env` | Fingerprint of what sets the lane's compiler and environment at that commit: the machine's lines of `toolchain/modules`, the commands `toolchain/bootstrap/modules.sh` runs for it, and its batch template (`environment()` in MFC's `.github/scripts/bench-record.py`); grind times are comparable only within one `env`. Lines before that rule were recomputed with `.github/scripts/bench-env-backfill.py` |
+| `env` | Fingerprint of what sets the lane's compiler and environment at that commit: the machine's lines of `toolchain/modules`, the commands `toolchain/bootstrap/modules.sh` runs for it, and its batch template (`environment()` in MFC's `.github/scripts/bench-record.py`); grind times are comparable only within one `env`. Lines before that rule were recomputed with `.github/scripts/bench-backfill.py` (then named `bench-env-backfill.py`) |
 | `cases.<name>.grind` | Grind time: nanoseconds per grid point, equation and Runge-Kutta stage |
 | `cases.<name>.def` | Hash of the case's input file, arguments and benchmark flags; grind times are comparable only within one `def` |
+| `cases.<name>.cmd` | Hash of how `bench.py` ran the case: the `mfc.sh run` arguments it passed (including what it adds itself, such as `--targets` and `--gbpp`), the build configuration and the environment variables it set (`harness()` in `bench-record.py`); grind times are comparable only within one `cmd`. Lines recorded before it existed were rebuilt with `.github/scripts/bench-backfill.py` from the files at their commit |
+| `cases.<name>.dflt` | Present when MFC defaults the case relies on changed since the lane's previous benchmark: `"name: old -> new"` for each input of simulation's `s_assign_default_values_to_user_inputs` that the case does not set and that no switch it leaves off gates (`default_changes()` in `bench-record.py`). A code change: flagged on the dashboard, not a break in the line |
 
 Lines are appended by the `record` job of `.github/workflows/bench.yml` after each scheduled benchmark run.
 
