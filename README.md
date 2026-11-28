@@ -12,7 +12,7 @@ One JSON object per line: one benchmark lane (machine, compiler, offload model) 
 | `cluster`, `device`, `interface` | The lane, e.g. `frontier_amd`, `gpu`, `omp` |
 | `hardware` | GPU model where a cluster has several (Phoenix: `h200`, `h100`, `a100`, `l40s`, `v100`); grind times differ several-fold between them |
 | `covers` | Every commit since the previously benchmarked one, as `[sha, subject, pr]`; any of them can be behind a change |
-| `env` | Fingerprint of the machine's own lines in `toolchain/modules` at that commit: its compiler and module set as the repository declares it |
+| `env` | Fingerprint of what sets the lane's compiler and environment at that commit: the machine's lines of `toolchain/modules`, the commands `toolchain/bootstrap/modules.sh` runs for it, and its batch template (`environment()` in MFC's `.github/scripts/bench-record.py`); grind times are comparable only within one `env`. Lines before that rule were recomputed with `.github/scripts/bench-env-backfill.py` |
 | `cases.<name>.grind` | Grind time: nanoseconds per grid point, equation and Runge-Kutta stage |
 | `cases.<name>.def` | Hash of the case's input file, arguments and benchmark flags; grind times are comparable only within one `def` |
 
